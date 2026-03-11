@@ -22,3 +22,7 @@
 (load-dependencies-path)
 
 (require 'hello-world)
+(mapc #'load
+      (seq-remove (lambda (f) (string= f (file-truename load-file-name)))
+                  (directory-files (file-name-directory load-file-name)
+                                   t "\\.el$")))
